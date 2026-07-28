@@ -1,0 +1,80 @@
+
+/* animations.css */
+
+.scoreboard{
+    animation:scoreboardEnter .6s ease;
+}
+
+@keyframes scoreboardEnter{
+    from{
+        opacity:0;
+        transform:translate(-50%,-60px);
+    }
+    to{
+        opacity:1;
+        transform:translate(-50%,0);
+    }
+}
+
+.goal-banner{
+    position:absolute;
+    top:110px;
+    left:50%;
+    transform:translateX(-50%) scale(.8);
+    background:#D4AF37;
+    color:#111;
+    padding:14px 36px;
+    border-radius:40px;
+    font-size:32px;
+    font-weight:800;
+    opacity:0;
+    pointer-events:none;
+}
+
+.goal-banner.show{
+    animation:goalPopup 3s ease;
+}
+
+@keyframes goalPopup{
+
+    0%{
+        opacity:0;
+        transform:translateX(-50%) scale(.8);
+    }
+
+    15%{
+        opacity:1;
+        transform:translateX(-50%) scale(1);
+    }
+
+    85%{
+        opacity:1;
+        transform:translateX(-50%) scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:translateX(-50%) scale(.8);
+    }
+
+}
+
+.score.flash{
+    animation:scoreFlash .5s;
+}
+
+@keyframes scoreFlash{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}

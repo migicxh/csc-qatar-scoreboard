@@ -1,73 +1,48 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CSC Broadcast Control Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CSC Scoreboard Control</title>
+
+<link rel="stylesheet" href="style.css">
 
 <style>
 body{
-    margin:0;
-    background:#111827;
-    color:#fff;
     font-family:Arial,sans-serif;
-    padding:30px;
-}
-
-h1{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.panel{
-    background:#1f2937;
-    border-radius:12px;
+    background:#111;
+    color:white;
     padding:20px;
-    margin-bottom:20px;
 }
 
-.panel h2{
-    margin-top:0;
-}
-
-input{
-    width:220px;
+input,button,select{
     padding:10px;
     margin:5px;
-    border:none;
-    border-radius:8px;
     font-size:16px;
+}
+
+.section{
+    margin-bottom:20px;
+    border:1px solid #444;
+    padding:15px;
+    border-radius:10px;
 }
 
 button{
-    padding:10px 18px;
-    margin:5px;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
     cursor:pointer;
-    transition:.2s;
 }
-
-button:hover{
-    transform:scale(1.05);
-}
-
-.green{background:#22c55e;color:white;}
-.red{background:#ef4444;color:white;}
-.yellow{background:#facc15;color:black;}
-.blue{background:#3b82f6;color:white;}
-.gray{background:#6b7280;color:white;}
 </style>
 
 </head>
 
 <body>
 
-<h1>⚽ CSC Broadcast Control Panel</h1>
+<h1>CSC Scoreboard Control</h1>
 
-<div class="panel">
+<div class="section">
 
 <h2>Teams</h2>
 
@@ -77,79 +52,46 @@ button:hover{
 
 <br>
 
-<button class="blue" onclick="updateTeams()">Update Teams</button>
+<button onclick="updateTeams()">Update Teams</button>
 
 </div>
 
-<div class="panel">
+<div class="section">
 
 <h2>Score</h2>
 
-<button class="green" onclick="homePlus()">Home +</button>
-<button class="red" onclick="homeMinus()">Home -</button>
+<input id="homeScoreInput" type="number" value="0" readonly>
 
-<button class="green" onclick="awayPlus()">Away +</button>
-<button class="red" onclick="awayMinus()">Away -</button>
+<button onclick="homeMinus()">-</button>
 
-</div>
+<button onclick="homePlus()">+</button>
 
-<div class="panel">
+<br><br>
 
-<h2>Clock</h2>
+<input id="awayScoreInput" type="number" value="0" readonly>
 
-<button class="green" onclick="startClock()">▶ Start</button>
+<button onclick="awayMinus()">-</button>
 
-<button class="yellow" onclick="pauseClock()">⏸ Pause</button>
-
-<button class="red" onclick="resetClock()">⟲ Reset</button>
+<button onclick="awayPlus()">+</button>
 
 </div>
 
-<div class="panel">
-
-<h2>Added Time</h2>
-
-<button class="green" onclick="addAddedTime()">+1 Minute</button>
-
-<button class="red" onclick="removeAddedTime()">-1 Minute</button>
-
-</div>
-
-<div class="panel">
-
-<h2>Cards</h2>
-
-<button class="yellow" onclick="homeYellow()">🟨 Home</button>
-
-<button class="yellow" onclick="awayYellow()">🟨 Away</button>
-
-<br>
-
-<button class="red" onclick="homeRed()">🟥 Home</button>
-
-<button class="red" onclick="awayRed()">🟥 Away</button>
-
-</div>
-
-<div class="panel">
+<div class="section">
 
 <h2>Match Status</h2>
 
-<button class="gray" onclick="setStatus('1ST HALF')">1ST HALF</button>
+<button onclick="setStatus('1ST HALF')">1ST HALF</button>
 
-<button class="gray" onclick="setStatus('HALFTIME')">HALFTIME</button>
+<button onclick="setStatus('HALFTIME')">HALFTIME</button>
 
-<button class="gray" onclick="setStatus('2ND HALF')">2ND HALF</button>
+<button onclick="setStatus('2ND HALF')">2ND HALF</button>
 
-<button class="gray" onclick="setStatus('FULL TIME')">FULL TIME</button>
-
-<button class="gray" onclick="setStatus('EXTRA TIME')">EXTRA TIME</button>
-
-<button class="gray" onclick="setStatus('PENALTIES')">PENALTIES</button>
+<button onclick="setStatus('FULLTIME')">FULLTIME</button>
 
 </div>
 
-<script src="control.js"></script>
+<script type="module" src="control.js"></script>
 
 </body>
+
 </html>

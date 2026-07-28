@@ -1,78 +1,81 @@
 
-const state = {
-    homeTeam: "HOME",
-    awayTeam: "AWAY",
-    homeScore: 0,
-    awayScore: 0,
-    status: "1ST HALF",
-    seconds: 0,
-    running: false,
-    addedTime: 0,
-    homeYellow: 0,
-    awayYellow: 0,
-    homeRed: 0,
-    awayRed: 0
-};
+let homeScore = Number(localStorage.getItem("homeScore")) || 0;
+let awayScore = Number(localStorage.getItem("awayScore")) || 0;
 
-function loadState() {
-    state.homeTeam = localStorage.getItem("homeTeam") || "HOME";
-    state.awayTeam = localStorage.getItem("awayTeam") || "AWAY";
-
-    state.homeScore = Number(localStorage.getItem("homeScore") || 0);
-    state.awayScore = Number(localStorage.getItem("awayScore") || 0);
-
-    state.status = localStorage.getItem("matchStatus") || "1ST HALF";
-
-    state.seconds = Number(localStorage.getItem("seconds") || 0);
-    state.running = localStorage.getItem("running") === "true";
-
-    state.addedTime = Number(localStorage.getItem("addedTime") || 0);
-
-    state.homeYellow = Number(localStorage.getItem("homeYellow") || 0);
-    state.awayYellow = Number(localStorage.getItem("awayYellow") || 0);
-
-    state.homeRed = Number(localStorage.getItem("homeRed") || 0);
-    state.awayRed = Number(localStorage.getItem("awayRed") || 0);
+function saveScores() {
+    localStorage.setItem("homeScore", homeScore);
+    localStorage.setItem("awayScore", awayScore);
 }
 
-function render() {
-
-    document.getElementById("homeTeam").textContent = state.homeTeam;
-    document.getElementById("awayTeam").textContent = state.awayTeam;
-
-    document.getElementById("homeScore").textContent = state.homeScore;
-    document.getElementById("awayScore").textContent = state.awayScore;
-
-    document.getElementById("matchStatus").textContent = state.status;
-
-    document.getElementById("homeYellowCount").textContent = "🟨 " + state.homeYellow;
-    document.getElementById("awayYellowCount").textContent = "🟨 " + state.awayYellow;
-
-    document.getElementById("homeRedCount").textContent = "🟥 " + state.homeRed;
-    document.getElementById("awayRedCount").textContent = "🟥 " + state.awayRed;
-
-    document.getElementById("addedTime").textContent = "+" + state.addedTime;
-
-    const minutes = Math.floor(state.seconds / 60);
-    const seconds = state.seconds % 60;
-
-    document.getElementById("timer").textContent =
-        String(minutes).padStart(2, "0") + ":" +
-        String(seconds).padStart(2, "0");
+function updateTeams() {
+    localStorage.setItem("homeTeam", document.getElementById("home").value || "HOME");
+    localStorage.setItem("awayTeam", document.getElementById("away").value || "AWAY");
 }
 
-setInterval(() => {
+function homePlus() {
+    homeScore++;
+    saveScores();
+}
 
-    loadState();
+function homeMinus() {
+    if (homeScore > 0) homeScore--;
+    saveScores();
+}
 
-    if (state.running) {
-        state.seconds++;
-        localStorage.setItem("seconds", state.seconds);
-    }
+function awayPlus() {
+    awayScore++;
+    saveScores();
+}
 
-    render();
+function awayMinus() {
+    if (awayScore > 0) awayScore--;
+    saveScores();
+}
 
-}, 1000);
+function setStatus(status) {
+    localStorage.setItem("matchStatus", status);
+}
 
-loadState();
-render();
+function startClock() {
+    localStorage.setItem("running", "true");
+}
+
+function pauseClock() {
+    localStorage.setItem("running", "false");
+}
+
+function resetClock() {
+    localStorage.setItem("running", "false");
+    localStorage.setItem("seconds", "0");
+}
+
+function homeYellow() {
+    let v = Number(localStorage.getItem("homeYellow")) || 0;
+    localStorage.setItem("homeYellow", ++v);
+}
+
+function awayYellow() {
+    let v = Number(localStorage.getItem("awayYellow")) || 0;
+    localStorage.setItem("awayYellow", ++v);
+}
+
+function homeRed() {
+    let v = Number(localStorage.getItem("homeRed")) || 0;
+    localStorage.setItem("homeRed", ++v);
+}
+
+function awayRed() {
+    let v = Number(localStorage.getItem("awayRed")) || 0;
+    localStorage.setItem("awayRed", ++v);
+}
+
+function addAddedTime() {
+    let t = Number(localStorage.getItem("addedTime")) || 0;
+    localStorage.setItem("addedTime", ++t);
+}
+
+function removeAddedTime() {
+    let t = Number(localStorage.getItem("addedTime")) || 0;
+    if (t > 0) t--;
+    localStorage.setItem("addedTime", t);
+}

@@ -3,88 +3,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CSC Scoreboard Control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSC Broadcast Control</title>
 
 <style>
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#1f1f1f;
+    font-family:Arial,sans-serif;
+    background:#181818;
     color:white;
     padding:30px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.section{
+    background:#262626;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
 }
 
 input{
     width:250px;
     padding:10px;
-    margin:5px;
     font-size:18px;
+    margin:5px;
 }
 
 button{
-    padding:12px 18px;
-    margin:5px;
+    padding:10px 18px;
     font-size:18px;
+    margin:5px;
     cursor:pointer;
+}
+
+.score{
+    font-size:26px;
+    margin:15px 0;
 }
 </style>
 
 </head>
 <body>
 
-<h1>CSC Qatar Scoreboard Control</h1>
+<h1>CSC Broadcast Control Panel</h1>
+
+<div class="section">
 
 <h2>Teams</h2>
 
 <input id="home" placeholder="Home Team">
+
 <input id="away" placeholder="Away Team">
 
-<button onclick="saveTeams()">Update Teams</button>
+<br>
+
+<button onclick="updateTeams()">Update Teams</button>
+
+</div>
+
+<div class="section">
 
 <h2>Score</h2>
 
-<button onclick="homePlus()">Home +</button>
-<button onclick="homeMinus()">Home -</button>
+<div class="score">
 
-<button onclick="awayPlus()">Away +</button>
-<button onclick="awayMinus()">Away -</button>
+<button onclick="homeMinus()">-</button>
 
-<script>
+<button onclick="homePlus()">HOME +</button>
 
-let homeScore=0;
-let awayScore=0;
+<button onclick="awayPlus()">AWAY +</button>
 
-function saveTeams(){
+<button onclick="awayMinus()">-</button>
 
-localStorage.setItem("homeTeam",home.value);
-localStorage.setItem("awayTeam",away.value);
+</div>
 
-}
+</div>
 
-function homePlus(){
-homeScore++;
-localStorage.setItem("homeScore",homeScore);
-}
+<div class="section">
 
-function homeMinus(){
-if(homeScore>0){
-homeScore--;
-localStorage.setItem("homeScore",homeScore);
-}
-}
+<h2>Match Status</h2>
 
-function awayPlus(){
-awayScore++;
-localStorage.setItem("awayScore",awayScore);
-}
+<button onclick="setStatus('1ST HALF')">1ST HALF</button>
 
-function awayMinus(){
-if(awayScore>0){
-awayScore--;
-localStorage.setItem("awayScore",awayScore);
-}
-}
+<button onclick="setStatus('HALFTIME')">HALFTIME</button>
 
-</script>
+<button onclick="setStatus('2ND HALF')">2ND HALF</button>
+
+<button onclick="setStatus('FULL TIME')">FULL TIME</button>
+
+</div>
+
+<script src="control.js"></script>
 
 </body>
 </html>

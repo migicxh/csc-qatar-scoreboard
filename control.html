@@ -3,31 +3,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CSC Scoreboard Control</title>
 
 <style>
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#202124;
+    background:#1f1f1f;
     color:white;
     padding:30px;
-}
-
-h1{
-    color:#fff;
 }
 
 input{
     width:250px;
     padding:10px;
-    margin:8px 0;
+    margin:5px;
     font-size:18px;
 }
 
 button{
-    padding:12px 20px;
-    margin:8px;
+    padding:12px 18px;
+    margin:5px;
     font-size:18px;
     cursor:pointer;
 }
@@ -38,27 +33,57 @@ button{
 
 <h1>CSC Qatar Scoreboard Control</h1>
 
-<p>Home Team</p>
+<h2>Teams</h2>
+
 <input id="home" placeholder="Home Team">
-
-<p>Away Team</p>
 <input id="away" placeholder="Away Team">
-
-<br><br>
 
 <button onclick="saveTeams()">Update Teams</button>
 
+<h2>Score</h2>
+
+<button onclick="homePlus()">Home +</button>
+<button onclick="homeMinus()">Home -</button>
+
+<button onclick="awayPlus()">Away +</button>
+<button onclick="awayMinus()">Away -</button>
+
 <script>
+
+let homeScore=0;
+let awayScore=0;
+
 function saveTeams(){
 
-localStorage.setItem("homeTeam",
-document.getElementById("home").value);
+localStorage.setItem("homeTeam",home.value);
+localStorage.setItem("awayTeam",away.value);
 
-localStorage.setItem("awayTeam",
-document.getElementById("away").value);
-
-alert("Updated!");
 }
+
+function homePlus(){
+homeScore++;
+localStorage.setItem("homeScore",homeScore);
+}
+
+function homeMinus(){
+if(homeScore>0){
+homeScore--;
+localStorage.setItem("homeScore",homeScore);
+}
+}
+
+function awayPlus(){
+awayScore++;
+localStorage.setItem("awayScore",awayScore);
+}
+
+function awayMinus(){
+if(awayScore>0){
+awayScore--;
+localStorage.setItem("awayScore",awayScore);
+}
+}
+
 </script>
 
 </body>

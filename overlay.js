@@ -1,29 +1,61 @@
 
-let seconds = 0;
+const state = {
+    homeTeam: "HOME",
+    awayTeam: "AWAY",
+    homeScore: 0,
+    awayScore: 0,
+    status: "1ST HALF",
+    seconds: 0
+};
 
-function updateOverlay(){
+function loadData() {
 
-seconds++;
+    state.homeTeam = localStorage.getItem("homeTeam") || "HOME";
+    state.awayTeam = localStorage.getItem("awayTeam") || "AWAY";
 
-const mins=Math.floor(seconds/60);
-const secs=seconds%60;
+    state.homeScore = Number(localStorage.getItem("homeScore") || 0);
+    state.awayScore = Number(localStorage.getItem("awayScore") || 0);
 
-timer.textContent=
-String(mins).padStart(2,"0")+":"+
-String(secs).padStart(2,"0");
+    state.status = localStorage.getItem("matchStatus") || "1ST HALF";
 
-homeTeam.textContent=
-localStorage.getItem("homeTeam") || "HOME";
+}
 
-awayTeam.textContent=
-localStorage.getItem("awayTeam") || "AWAY";
+function updateClock() {
 
-homeScore.textContent=
-localStorage.getItem("homeScore") || "0";
+    state.seconds++;
 
-awayScore.textContent=
-localStorage.getItem("awayScore") || "0";
+    const minutes = Math.floor(state.seconds / 60);
+    const seconds = state.seconds % 60;
+
+    document.getElementById("timer").textContent =
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+}
+
+function render() {
+
+    document.getElementById("homeTeam").textContent = state.homeTeam;
+    document.getElementById("awayTeam").textContent = state.awayTeam;
+
+    document.getElementById("homeScore").textContent = state.homeScore;
+    document.getElementById("awayScore").textContent = state.awayScore;
+
+    document.getElementById("matchStatus").textContent = state.status;
+
+}
+
+function updateOverlay() {
+
+    loadData();
+
+    render();
+
+    updateClock();
 
 }
 
 setInterval(updateOverlay,1000);
+
+render();

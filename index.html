@@ -4,11 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSC Broadcast Scoreboard</title>
+
+<title>CSC Broadcast Overlay</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
 <div class="scoreboard">
@@ -17,9 +19,19 @@
 
         <img id="homeLogo" src="assets/default-team.png">
 
-        <span class="team-name" id="homeTeam">
-            HOME
-        </span>
+        <div>
+
+            <div class="team-name" id="homeTeam">HOME</div>
+
+            <div class="cards">
+
+                <span id="homeYellowCount">🟨0</span>
+
+                <span id="homeRedCount">🟥0</span>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -35,9 +47,19 @@
 
     <div class="team">
 
-        <span class="team-name" id="awayTeam">
-            AWAY
-        </span>
+        <div>
+
+            <div class="team-name" id="awayTeam">AWAY</div>
+
+            <div class="cards">
+
+                <span id="awayYellowCount">🟨0</span>
+
+                <span id="awayRedCount">🟥0</span>
+
+            </div>
+
+        </div>
 
         <img id="awayLogo" src="assets/default-team.png">
 
@@ -45,20 +67,14 @@
 
     <div class="time-box">
 
-        <div class="time" id="timer">
-            00:00
-        </div>
+        <div class="time" id="timer">00:00</div>
 
         <div class="status" id="matchStatus">
             1ST HALF
         </div>
 
-        <div class="cards">
-
-            <div class="yellow" id="homeYellow"></div>
-
-            <div class="red" id="homeRed"></div>
-
+        <div id="addedTime">
+            +0
         </div>
 
     </div>

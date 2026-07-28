@@ -2,31 +2,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSC Qatar Scoreboard</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSC Broadcast Scoreboard</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
 <div class="scoreboard">
 
-    <div class="team" id="homeTeam">
-        <span>HOME</span>
+    <div class="team">
+
+        <img id="homeLogo" src="assets/default-team.png">
+
+        <span class="team-name" id="homeTeam">
+            HOME
+        </span>
+
     </div>
 
     <div class="score">
+
         <span id="homeScore">0</span>
-        <span class="dash">-</span>
+
+        <span>-</span>
+
         <span id="awayScore">0</span>
+
     </div>
 
-    <div class="team" id="awayTeam">
-        <span>AWAY</span>
+    <div class="team">
+
+        <span class="team-name" id="awayTeam">
+            AWAY
+        </span>
+
+        <img id="awayLogo" src="assets/default-team.png">
+
     </div>
 
-    <div class="time">
-        <span id="timer">00:00</span>
+    <div class="time-box">
+
+        <div class="time" id="timer">
+            00:00
+        </div>
+
+        <div class="status" id="matchStatus">
+            1ST HALF
+        </div>
+
+        <div class="cards">
+
+            <div class="yellow" id="homeYellow"></div>
+
+            <div class="red" id="homeRed"></div>
+
+        </div>
+
     </div>
 
 </div>

@@ -1,26 +1,29 @@
 
 let seconds = 0;
 
-function updateTimer(){
+function updateOverlay(){
 
 seconds++;
 
 const mins=Math.floor(seconds/60);
 const secs=seconds%60;
 
-document.getElementById("timer").textContent=
+timer.textContent=
 String(mins).padStart(2,"0")+":"+
 String(secs).padStart(2,"0");
 
-const home=localStorage.getItem("homeTeam");
-const away=localStorage.getItem("awayTeam");
+homeTeam.textContent=
+localStorage.getItem("homeTeam") || "HOME";
 
-if(home)
-document.getElementById("homeTeam").textContent=home;
+awayTeam.textContent=
+localStorage.getItem("awayTeam") || "AWAY";
 
-if(away)
-document.getElementById("awayTeam").textContent=away;
+homeScore.textContent=
+localStorage.getItem("homeScore") || "0";
+
+awayScore.textContent=
+localStorage.getItem("awayScore") || "0";
 
 }
 
-setInterval(updateTimer,1000);
+setInterval(updateOverlay,1000);

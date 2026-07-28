@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
 <title>CSC Broadcast Overlay</title>
 
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animations.css">
 
 </head>
 
@@ -24,11 +26,8 @@
             <div class="team-name" id="homeTeam">HOME</div>
 
             <div class="cards">
-
                 <span id="homeYellowCount">🟨0</span>
-
                 <span id="homeRedCount">🟥0</span>
-
             </div>
 
         </div>
@@ -52,11 +51,8 @@
             <div class="team-name" id="awayTeam">AWAY</div>
 
             <div class="cards">
-
                 <span id="awayYellowCount">🟨0</span>
-
                 <span id="awayRedCount">🟥0</span>
-
             </div>
 
         </div>
@@ -69,16 +65,16 @@
 
         <div class="time" id="timer">00:00</div>
 
-        <div class="status" id="matchStatus">
-            1ST HALF
-        </div>
+        <div class="status" id="matchStatus">1ST HALF</div>
 
-        <div id="addedTime">
-            +0
-        </div>
+        <div id="addedTime">+0</div>
 
     </div>
 
+</div>
+
+<div id="goalBanner" class="goal-banner">
+    ⚽ GOAL!
 </div>
 
 <script src="overlay.js"></script>

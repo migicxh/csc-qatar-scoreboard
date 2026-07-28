@@ -1,81 +1,46 @@
 
-let homeScore = Number(localStorage.getItem("homeScore")) || 0;
-let awayScore = Number(localStorage.getItem("awayScore")) || 0;
+import {
+    scoreboardRef,
+    update
+} from "./firebase.js";
 
-function saveScores() {
-    localStorage.setItem("homeScore", homeScore);
-    localStorage.setItem("awayScore", awayScore);
+function send(data) {
+    update(scoreboardRef, data);
 }
 
-function updateTeams() {
-    localStorage.setItem("homeTeam", document.getElementById("home").value || "HOME");
-    localStorage.setItem("awayTeam", document.getElementById("away").value || "AWAY");
-}
+window.updateTeams = function () {
+    send({
+        homeTeam: document.getElementById("home").value,
+        awayTeam: document.getElementById("away").value
+    });
+};
 
-function homePlus() {
-    homeScore++;
-    saveScores();
-}
+window.homePlus = function () {
+    const score = Number(document.getElementById("homeScoreInput")?.value || 0) + 1;
+    document.getElementById("homeScoreInput").value = score;
+    send({ homeScore: score });
+};
 
-function homeMinus() {
-    if (homeScore > 0) homeScore--;
-    saveScores();
-}
+window.homeMinus = function () {
+    let score = Number(document.getElementById("homeScoreInput")?.value || 0);
+    if (score > 0) score--;
+    document.getElementById("homeScoreInput").value = score;
+    send({ homeScore: score });
+};
 
-function awayPlus() {
-    awayScore++;
-    saveScores();
-}
+window.awayPlus = function () {
+    const score = Number(document.getElementById("awayScoreInput")?.value || 0) + 1;
+    document.getElementById("awayScoreInput").value = score;
+    send({ awayScore: score });
+};
 
-function awayMinus() {
-    if (awayScore > 0) awayScore--;
-    saveScores();
-}
+window.awayMinus = function () {
+    let score = Number(document.getElementById("awayScoreInput")?.value || 0);
+    if (score > 0) score--;
+    document.getElementById("awayScoreInput").value = score;
+    send({ awayScore: score });
+};
 
-function setStatus(status) {
-    localStorage.setItem("matchStatus", status);
-}
-
-function startClock() {
-    localStorage.setItem("running", "true");
-}
-
-function pauseClock() {
-    localStorage.setItem("running", "false");
-}
-
-function resetClock() {
-    localStorage.setItem("running", "false");
-    localStorage.setItem("seconds", "0");
-}
-
-function homeYellow() {
-    let v = Number(localStorage.getItem("homeYellow")) || 0;
-    localStorage.setItem("homeYellow", ++v);
-}
-
-function awayYellow() {
-    let v = Number(localStorage.getItem("awayYellow")) || 0;
-    localStorage.setItem("awayYellow", ++v);
-}
-
-function homeRed() {
-    let v = Number(localStorage.getItem("homeRed")) || 0;
-    localStorage.setItem("homeRed", ++v);
-}
-
-function awayRed() {
-    let v = Number(localStorage.getItem("awayRed")) || 0;
-    localStorage.setItem("awayRed", ++v);
-}
-
-function addAddedTime() {
-    let t = Number(localStorage.getItem("addedTime")) || 0;
-    localStorage.setItem("addedTime", ++t);
-}
-
-function removeAddedTime() {
-    let t = Number(localStorage.getItem("addedTime")) || 0;
-    if (t > 0) t--;
-    localStorage.setItem("addedTime", t);
-}
+window.setStatus = function(status){
+    send({ status });
+};

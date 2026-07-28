@@ -5,57 +5,50 @@ const state = {
     homeScore: 0,
     awayScore: 0,
     status: "1ST HALF",
-    seconds: 0
+    seconds: 0,
+    running: false
 };
 
-function loadData() {
-
+function loadState() {
     state.homeTeam = localStorage.getItem("homeTeam") || "HOME";
     state.awayTeam = localStorage.getItem("awayTeam") || "AWAY";
-
     state.homeScore = Number(localStorage.getItem("homeScore") || 0);
     state.awayScore = Number(localStorage.getItem("awayScore") || 0);
-
     state.status = localStorage.getItem("matchStatus") || "1ST HALF";
-
-}
-
-function updateClock() {
-
-    state.seconds++;
-
-    const minutes = Math.floor(state.seconds / 60);
-    const seconds = state.seconds % 60;
-
-    document.getElementById("timer").textContent =
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(seconds).padStart(2, "0");
-
+    state.seconds = Number(localStorage.getItem("seconds") || 0);
+    state.running = localStorage.getItem("running") === "true";
 }
 
 function render() {
+    homeTeam.textContent = state.homeTeam;
+    awayTeam.textContent = state.awayTeam;
 
-    document.getElementById("homeTeam").textContent = state.homeTeam;
-    document.getElementById("awayTeam").textContent = state.awayTeam;
+    homeScore.textContent = state.homeScore;
+    awayScore.textContent = state.awayScore;
 
-    document.getElementById("homeScore").textContent = state.homeScore;
-    document.getElementById("awayScore").textContent = state.awayScore;
+    matchStatus.textContent = state.status;
 
-    document.getElementById("matchStatus").textContent = state.status;
+    const m = Math.floor(state.seconds / 60);
+    const s = state.seconds % 60;
 
+    timer.textContent =
+        String(m).padStart(2, "0") +
+        ":" +
+        String(s).padStart(2, "0");
 }
 
-function updateOverlay() {
+setInterval(() => {
 
-    loadData();
+    loadState();
+
+    if (state.running) {
+        state.seconds++;
+        localStorage.setItem("seconds", state.seconds);
+    }
 
     render();
 
-    updateClock();
+}, 1000);
 
-}
-
-setInterval(updateOverlay,1000);
-
+loadState();
 render();
